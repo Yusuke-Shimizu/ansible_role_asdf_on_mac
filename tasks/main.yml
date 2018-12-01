@@ -1,0 +1,2 @@
+- import_tasks: "install.yml"
+# - import_tasks: "install_plugins.yml"

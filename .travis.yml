@@ -1,0 +1,12 @@
+language: objective-c
+os:
+  - osx
+before_install:
+  - sw_vers
+  - brew update
+  - brew install ansible
+  - ansible --version
+script:
+  - ansible-playbook -vv main.yml -i hosts
+notifications:
+    slack: shimi-rsslack:bUoxLktUdcotH8rYgMyCcTJR
