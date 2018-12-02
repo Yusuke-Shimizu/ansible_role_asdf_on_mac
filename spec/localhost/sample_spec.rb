@@ -1,13 +1,21 @@
 require 'spec_helper'
 
 describe package('ansible') do
-  it { should be_installed }
+	it { should be_installed }
 end
 
 describe command('ansible --version') do
-  its(:exit_status) { should eq 0 }
+	its(:exit_status) { should eq 0 }
 end
 
 describe command('which serverspec-init') do
-  its(:exit_status) { should eq 0 }
+	its(:exit_status) { should eq 0 }
+end
+
+describe command('which asdf') do
+	its(:exit_status) { should eq 0 }
+end
+
+describe command("bash -lc 'which asdf'") do
+	its(:exit_status) { should eq 0 }
 end
