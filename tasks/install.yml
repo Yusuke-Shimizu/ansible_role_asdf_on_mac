@@ -6,10 +6,9 @@
     # version: "{{ asdf_version }}"
   # become_user: "{{ asdf_user }}"
 
-# - name: "source asdf script"
-#   template:
-#     src: "asdf.sh.j2"
-#     dest: "/etc/profile.d/asdf.sh"
-#     owner: "root"
-#     group: "root"
-#     mode: 0755
+- name: insert/update asdf shell in bash_profile
+  blockinfile:
+    path: ~/.bash_profile
+    block: |
+      . $HOME/.asdf/asdf.sh
+      . $HOME/.asdf/completions/asdf.bash
