@@ -12,10 +12,10 @@ describe command('which serverspec-init') do
 	its(:exit_status) { should eq 0 }
 end
 
-describe command('which asdf') do
+describe command('asdf --version') do
 	its(:exit_status) { should eq 0 }
 end
 
-describe command("bash -lc 'which asdf'") do
+describe command("bash -lc 'asdf --version'") do
 	its(:exit_status) { should eq 0 }
 end
