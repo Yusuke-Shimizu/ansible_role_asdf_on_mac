@@ -6,6 +6,7 @@ before_install:
   - brew update
   - brew install ansible
   - ansible --version
+  - ansible -m setup localhost
 script:
   - ansible-playbook -vv main.yml -i hosts
 notifications:
