@@ -8,6 +8,6 @@ describe command('ansible --version') do
   its(:exit_status) { should eq 0 }
 end
 
-describe command('serverspec-init --version') do
+describe command('which serverspec-init') do
   its(:exit_status) { should eq 0 }
 end
