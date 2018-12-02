@@ -9,5 +9,6 @@ before_install:
   - ansible -m setup localhost
 script:
   - ansible-playbook -vv main.yml -i hosts
+  - rake
 notifications:
     slack: shimi-rsslack:bUoxLktUdcotH8rYgMyCcTJR
