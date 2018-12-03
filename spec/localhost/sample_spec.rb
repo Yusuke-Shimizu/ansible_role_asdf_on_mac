@@ -33,7 +33,7 @@ describe command("bash -lc 'asdf current python'") do
 	its(:stdout) { should match /3.7.1/ }
 end
 
-describe command("bash -lc 'asdf current go'") do
+describe command("bash -lc 'asdf current golang'") do
 	its(:exit_status) { should eq 0 }
 	its(:stdout) { should match /1.11/ }
 end
