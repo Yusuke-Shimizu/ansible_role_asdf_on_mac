@@ -20,12 +20,12 @@ describe command("bash -lc 'asdf plugin-list'") do
 	its(:exit_status) { should eq 0 }
 	its(:stdout) { should match /ruby/ }
 	its(:stdout) { should match /python/ }
-	its(:stdout) { should match /go/ }
+	its(:stdout) { should match /golang/ }
 end
 
 describe command("bash -lc 'asdf current'") do
 	its(:exit_status) { should eq 0 }
 	its(:stdout) { should match /ruby/ }
 	its(:stdout) { should match /python/ }
-	its(:stdout) { should match /go/ }
+	its(:stdout) { should match /golang/ }
 end
