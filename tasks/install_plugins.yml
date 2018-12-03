@@ -1,0 +1,3 @@
+---
+- name: Install plugins
+  shell: /bin/bash -lc "rbenv install 2.1.2 && rbenv rehash && rbenv global 2.1.2"
