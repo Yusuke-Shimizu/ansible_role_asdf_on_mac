@@ -17,8 +17,8 @@
   with_items: '{{ result.results }}'
 
 - name: Install plugins
-  shell: /bin/bash -lc "asdf global {{ item }}"
+  shell: /bin/bash -lc "asdf global {{ item.name }} {{ item.version }}"
   with_items:
-    - { name: python, version: test }
-    - { name: ruby, version: test }
-    - { name: go, version: test }
+    - { name: python, version: 3.7.1 }
+    - { name: ruby, version: 2.5.3 }
+    - { name: go, version: 1.11 }
