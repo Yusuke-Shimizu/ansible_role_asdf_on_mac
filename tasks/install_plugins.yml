@@ -1,3 +1,24 @@
 ---
 - name: Install plugins
-  shell: /bin/bash -lc "rbenv install 2.1.2 && rbenv rehash && rbenv global 2.1.2"
+  shell: /bin/bash -lc "asdf plugin-add {{ item }}"
+  with_items:
+    - python
+    - ruby
+    - go
+
+- name: List plugins
+  shell: /bin/bash -lc "asdf list-all {{ item }}"
+  register: result
+  with_items:
+    - python
+    - ruby
+    - go
+- debug: var=item.stdout_lines
+  with_items: '{{ result.results }}'
+
+- name: Install plugins
+  shell: /bin/bash -lc "asdf global {{ item }}"
+  with_items:
+    - { name: python, version: test }
+    - { name: ruby, version: test }
+    - { name: go, version: test }

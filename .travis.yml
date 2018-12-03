@@ -3,7 +3,7 @@ os:
   - osx
 before_install:
   - sw_vers
-  - brew update
+  # - brew update
   - brew install ansible
   - ansible --version
   - ansible -m setup localhost
