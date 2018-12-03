@@ -23,11 +23,19 @@ describe command("bash -lc 'asdf plugin-list'") do
 	its(:stdout) { should match /golang/ }
 end
 
-describe command("bash -lc 'asdf current'") do
+describe command("bash -lc 'asdf current ruby'") do
 	its(:exit_status) { should eq 0 }
-	its(:stdout) { should match /ruby/ }
-	its(:stdout) { should match /python/ }
-	its(:stdout) { should match /golang/ }
+	its(:stdout) { should match /2.5.3/ }
+end
+
+describe command("bash -lc 'asdf current python'") do
+	its(:exit_status) { should eq 0 }
+	its(:stdout) { should match /3.7.1/ }
+end
+
+describe command("bash -lc 'asdf current go'") do
+	its(:exit_status) { should eq 0 }
+	its(:stdout) { should match /1.11/ }
 end
 
 describe command("bash -lc 'ruby --version'") do

@@ -6,15 +6,15 @@
     - ruby
     - golang
 
-- name: List plugins
-  shell: /bin/bash -lc "asdf list-all {{ item }}"
-  register: result
-  with_items:
-    - python
-    - ruby
-    - golang
-- debug: var=item.stdout_lines
-  with_items: '{{ result.results }}'
+# - name: List plugins
+#   shell: /bin/bash -lc "asdf list-all {{ item }}"
+#   register: result
+#   with_items:
+#     - python
+#     - ruby
+#     - golang
+# - debug: var=item.stdout_lines
+#   with_items: '{{ result.results }}'
 
 - name: Install language
   shell: /bin/bash -lc "asdf install {{ item.name }} {{ item.version }}"
