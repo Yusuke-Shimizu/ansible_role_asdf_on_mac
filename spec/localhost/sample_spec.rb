@@ -38,17 +38,17 @@ describe command("bash -lc 'asdf current golang'") do
 	its(:stdout) { should match /1.11/ }
 end
 
-describe command("bash -lc 'ruby --version'") do
+describe command("ruby --version") do
 	its(:exit_status) { should eq 0 }
 	its(:stdout) { should match /2.5.3/ }
 end
 
-describe command("bash -lc 'python --version'") do
+describe command("python --version") do
 	its(:exit_status) { should eq 0 }
 	its(:stdout) { should match /3.7.1/ }
 end
 
-describe command("bash -lc 'go version'") do
+describe command("go version") do
 	its(:exit_status) { should eq 0 }
 	its(:stdout) { should match /1.11/ }
 end
