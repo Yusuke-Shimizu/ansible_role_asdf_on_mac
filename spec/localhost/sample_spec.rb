@@ -29,3 +29,18 @@ describe command("bash -lc 'asdf current'") do
 	its(:stdout) { should match /python/ }
 	its(:stdout) { should match /golang/ }
 end
+
+describe command("bash -lc 'ruby --version'") do
+	its(:exit_status) { should eq 0 }
+	its(:stdout) { should match /2.5.3/ }
+end
+
+describe command("bash -lc 'python --version'") do
+	its(:exit_status) { should eq 0 }
+	its(:stdout) { should match /3.7.1/ }
+end
+
+describe command("bash -lc 'go version'") do
+	its(:exit_status) { should eq 0 }
+	its(:stdout) { should match /1.11/ }
+end
