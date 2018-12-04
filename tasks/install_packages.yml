@@ -1,4 +1,11 @@
 ---
+- name: Upgrade gem
+  shell: /bin/bash -lc "gem update --system"
+- name: Upgrade bundler
+  shell: /bin/bash -lc "gem update bundler"
+- name: Upgrade pip
+  shell: /bin/bash -lc "pip install --upgrade pip"
+
 - name: Install travic client
   shell: /bin/bash -lc "gem install travis"
 
