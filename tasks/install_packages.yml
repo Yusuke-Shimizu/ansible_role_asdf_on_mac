@@ -3,4 +3,4 @@
   shell: /bin/bash -lc "gem install travis"
 
 - name: Install aws cli
-  shell: /bin/bash -lc "pip install awscli"
+  shell: /bin/bash -lc "pip install awscli --upgrade --user"

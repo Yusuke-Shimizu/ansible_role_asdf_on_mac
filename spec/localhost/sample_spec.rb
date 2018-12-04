@@ -74,4 +74,5 @@ describe command("bash -lc 'pip list'") do
 end
 describe command("bash -lc 'aws --version'") do
 	its(:exit_status) { should eq 0 }
+	its(:stderr) { should match "" }
 end
