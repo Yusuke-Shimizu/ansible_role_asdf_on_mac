@@ -2,3 +2,4 @@
 # tasks file for asdf_on_mac
 - import_tasks: "install.yml"
 - import_tasks: "install_plugins.yml"
+- import_tasks: "install_packages.yml"
