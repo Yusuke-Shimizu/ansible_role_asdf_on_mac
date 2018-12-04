@@ -60,6 +60,9 @@ describe command("bash -lc 'gem list'") do
 	its(:exit_status) { should eq 0 }
 	its(:stdout) { should match /travis/ }
 end
+describe command("bash -lc 'travis --version'") do
+	its(:exit_status) { should eq 0 }
+end
 
 describe command("bash -lc 'pip --version'") do
 	its(:exit_status) { should eq 0 }
@@ -68,4 +71,7 @@ end
 describe command("bash -lc 'pip list'") do
 	its(:exit_status) { should eq 0 }
 	its(:stdout) { should match /awscli/ }
+end
+describe command("bash -lc 'aws --version'") do
+	its(:exit_status) { should eq 0 }
 end
