@@ -63,7 +63,7 @@ end
 
 describe command("bash -lc 'pip --version'") do
 	its(:exit_status) { should eq 0 }
-	its(:stdout) { should match /18.1/ }
+	its(:stdout) { should match /10.0.1/ }
 end
 describe command("bash -lc 'pip list'") do
 	its(:exit_status) { should eq 0 }
