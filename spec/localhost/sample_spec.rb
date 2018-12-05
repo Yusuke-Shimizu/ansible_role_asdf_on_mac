@@ -5,6 +5,12 @@ RSpec.shared_context 'check_command' do
 	its(:stderr) { should eq '' }
 end
 
+describe command('brew doctor') do
+	its(:stdout) { should match /Your system is ready to brew./ }
+
+	include_context 'check_command'
+end
+
 describe package('ansible') do
 	it { should be_installed }
 end

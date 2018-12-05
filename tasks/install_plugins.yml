@@ -29,3 +29,6 @@
     - { name: python, version: 3.7.1 }
     - { name: ruby, version: 2.5.3 }
     - { name: golang, version: 1.11 }
+
+- name: Recreate shims
+  shell: /bin/bash -lc "asdf reshim python"
