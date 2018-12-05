@@ -2,7 +2,7 @@ language: ruby
 os:
   - osx
 before_install:
-  # - brew update
+  - brew update
   - brew install ansible
   - ansible --version
   - ansible -m setup localhost
