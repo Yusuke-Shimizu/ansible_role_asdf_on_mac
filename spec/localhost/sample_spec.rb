@@ -5,23 +5,23 @@ RSpec.shared_context 'check_command' do
 	its(:stderr) { should eq '' }
 end
 
-describe command('brew doctor') do
-	its(:stdout) { should match /Your system is ready to brew./ }
+# describe command('brew doctor') do
+# 	its(:stdout) { should match /Your system is ready to brew./ }
 
-	include_context 'check_command'
-end
+# 	include_context 'check_command'
+# end
 
-describe package('ansible') do
-	it { should be_installed }
-end
+# describe package('ansible') do
+# 	it { should be_installed }
+# end
 
-describe command('ansible --version') do
-	include_context 'check_command'
-end
+# describe command('ansible --version') do
+# 	include_context 'check_command'
+# end
 
-describe command('which serverspec-init') do
-	include_context 'check_command'
-end
+# describe command('which serverspec-init') do
+# 	include_context 'check_command'
+# end
 
 describe command("bash -lc 'asdf --version'") do
 	include_context 'check_command'
@@ -67,9 +67,9 @@ describe command("bash -lc 'gem --version'") do
 	include_context 'check_command'
 	its(:stdout) { should match /2.7.8/ }
 end
-describe package('travis') do
-	it { should be_installed.by('gem') }
-end
+# describe package('travis') do
+# 	it { should be_installed.by('gem') }
+# end
 describe command("bash -lc 'travis --version'") do
 	include_context 'check_command'
 end
@@ -78,9 +78,9 @@ describe command("bash -lc 'pip --version'") do
 	include_context 'check_command'
 	its(:stdout) { should match /18.1/ }
 end
-describe package('awscli') do
-	it { should be_installed.by('pip') }
-end
+# describe package('awscli') do
+# 	it { should be_installed.by('pip') }
+# end
 describe command("bash -lc 'aws --version'") do
 	include_context 'check_command'
 end
