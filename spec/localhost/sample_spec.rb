@@ -65,7 +65,7 @@ end
 # 
 describe command("bash -lc 'gem --version'") do
 	include_context 'check_command'
-	its(:stdout) { should match /2.7.6/ }
+	its(:stdout) { should match /2.7.8/ }
 end
 describe package('travis') do
 	it { should be_installed.by('gem') }
@@ -76,7 +76,7 @@ end
 
 describe command("bash -lc 'pip --version'") do
 	include_context 'check_command'
-	its(:stdout) { should match /10.0.1/ }
+	its(:stdout) { should match /18.1/ }
 end
 describe package('awscli') do
 	it { should be_installed.by('pip') }
