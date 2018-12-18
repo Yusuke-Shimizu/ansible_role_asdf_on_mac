@@ -1,10 +1,10 @@
 ---
-# - name: Upgrade gem
-#   shell: /bin/bash -lc "gem update --system"
-# - name: Recreate
-#   shell: /bin/bash -lc "gem pristine --all"
-# - name: Upgrade bundler
-#   shell: /bin/bash -lc "gem update bundler"
+- name: Upgrade gem
+  shell: /bin/bash -lc "gem update --system"
+- name: Recreate
+  shell: /bin/bash -lc "gem pristine --all"
+- name: Upgrade bundler
+  shell: /bin/bash -lc "gem update bundler"
 - name: Upgrade pip
   shell: /bin/bash -lc "pip install --upgrade pip"
 

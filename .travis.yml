@@ -6,6 +6,7 @@ before_install:
   - brew install ansible
   - ansible --version
   - ansible -m setup localhost
+  - cp .default-gems $HOME/
 script:
   - ansible-playbook -vv main.yml -i hosts
   - rake
