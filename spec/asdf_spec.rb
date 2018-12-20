@@ -11,11 +11,11 @@ RSpec.shared_context 'check_command' do
 	its('exit_status') { should eq 0 }
 end
 
-describe command("bash -lc 'asdf --version'") do
+describe command("asdf --version") do
 	include_context 'check_command'
 end
 
-describe command("bash -lc 'asdf plugin-list'") do
+describe command("asdf plugin-list") do
 	include_context 'check_command'
 	its('stdout') { should match /ruby/ }
 	its('stdout') { should match /python/ }
