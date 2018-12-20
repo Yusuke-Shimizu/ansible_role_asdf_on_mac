@@ -10,6 +10,8 @@ before_install:
   - cp .default-gems $HOME/
 script:
   - ansible-playbook -vv main.yml -i hosts
+  - bash -lc 'which gem'
+  - bash -lc 'which pip'
   # - rake
   - inspec exec spec/asdf_spec.rb
 notifications:
