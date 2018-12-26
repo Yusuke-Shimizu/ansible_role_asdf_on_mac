@@ -1,10 +1,10 @@
 require 'rake'
 require 'rspec/core/rake_task'
 
-task :spec    => 'spec:all'
-task :default => :spec
+task :serverspec    => 'serverspec:all'
+task :default => :serverspec
 
-namespace :spec do
+namespace :serverspec do
   targets = []
   Dir.glob('./spec/*').each do |dir|
     next unless File.directory?(dir)
@@ -23,5 +23,12 @@ namespace :spec do
       ENV['TARGET_HOST'] = original_target
       t.pattern = "spec/#{original_target}/*_spec.rb"
     end
+  end
+end
+
+namespace :inspec do
+  desc "Run Inspec tests"
+  task :default do
+    sh 'inspec exec spec/asdf_spec.rb'
   end
 end

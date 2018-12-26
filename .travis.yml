@@ -12,7 +12,6 @@ script:
   - ansible-playbook -vv main.yml -i hosts
   - bash -lc 'which gem'
   - bash -lc 'which pip'
-  # - rake
-  - inspec exec spec/asdf_spec.rb
+  - rake inspec:default
 notifications:
     slack: shimi-rsslack:bUoxLktUdcotH8rYgMyCcTJR
