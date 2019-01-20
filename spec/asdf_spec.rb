@@ -19,7 +19,7 @@ describe file(ghq_asdf_path) do
 end
 asdf_root = "#{ENV['HOME']}/.asdf"
 describe file(asdf_root) do
-	its('type') { should eq :link }
+	its('type') { should eq :symlink }
 	its('link_path') { should eq ghq_asdf_path }
 end
 
