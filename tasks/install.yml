@@ -1,18 +1,37 @@
 ---
-- stat: 
-    path: "{{ ansible_env.HOME }}/.asdf/asdf.sh"
-  register: is_file
+- name: check ghq command
+  command: which ghq
+  register: ghq_result
+  ignore_errors: true
+  changed_when: False
 
-- name: "install asdf"
+- debug: 
+    var: ghq_result
+
+- debug: msg="ghq is not exist"
+  when: ghq_result.failed
+
+- name: install asdf from ghq
+  ghq:
+    name: asdf-vm/asdf
+  when: not ghq_result.failed
+
+- name: link asdf directory
+  file:
+    src: "{{ ansible_env.HOME }}/.ghq/github.com/asdf-vm/asdf"
+    dest: "{{ ansible_env.HOME }}/.asdf"
+    state: link
+  when: not ghq_result.failed
+
+- name: install asdf from git
   git:
     repo: "https://github.com/asdf-vm/asdf.git"
-    dest: "~/.asdf"
-  when: not is_file.stat.exists
+    dest: "{{ ansible_env.HOME }}/.asdf"
+  when: ghq_result.failed
 
-- name: insert/update asdf shell in bash_profile
+- name: insert/update asdf shell in bashrc
   blockinfile:
-    path: ~/.bash_profile
+    path: "{{ ansible_env.HOME }}/.bashrc"
     block: |
       . $HOME/.asdf/asdf.sh
       . $HOME/.asdf/completions/asdf.bash
-  when: not is_file.stat.exists

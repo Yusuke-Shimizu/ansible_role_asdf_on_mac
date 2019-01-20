@@ -8,8 +8,10 @@
 - name: Upgrade pip
   shell: /bin/bash -lc "pip install --upgrade pip"
 
-# - name: Install travic client
-#   shell: /bin/bash -lc "gem install travis"
+- name: Install travic client
+  shell: /bin/bash -lc "gem install travis"
 
 - name: Install aws cli
   shell: /bin/bash -lc "pip install awscli --upgrade --user"
+- name: Install molecule
+  shell: /bin/bash -lc "pip install molecule --upgrade --user"
