@@ -4,6 +4,7 @@ os:
 before_install:
   - brew update
   - gem install rake
+  - brew install ghq
   - brew install ansible
   - ansible --version
   - ansible -m setup localhost
