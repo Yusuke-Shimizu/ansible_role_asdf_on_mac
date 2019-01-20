@@ -3,6 +3,7 @@ os:
   - osx
 before_install:
   - brew update
+  - gem install rake
   - brew install ansible
   - ansible --version
   - ansible -m setup localhost
