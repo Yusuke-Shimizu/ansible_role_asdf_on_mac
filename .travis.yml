@@ -6,10 +6,11 @@ before_install:
   - brew install ansible
   - ansible --version
   - ansible -m setup localhost
+  - rake ansible:install
   - curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
   - cp .default-gems $HOME/
 script:
-  - ansible-playbook -vv main.yml -i inventory
+  - rake ansible:build
   - bash -lc 'which gem'
   - bash -lc 'which pip'
   - rake inspec:default
