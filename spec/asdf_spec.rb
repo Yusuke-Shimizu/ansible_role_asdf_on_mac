@@ -35,13 +35,13 @@ describe command("bash -lc 'asdf plugin-list'") do
 end
 
 # check listed of package
-asdf_package_path = "#{asdf_root}/shims"
-describe gem('travis', "#{asdf_package_path}/gem") do
-  it { should be_installed }
-end
-describe pip('aws', "#{asdf_package_path}/pip") do
-  it { should be_installed }
-end
+# asdf_package_path = "#{asdf_root}/shims"
+# describe gem('travis', "#{asdf_package_path}/gem") do
+#   it { should be_installed }
+# end
+# describe pip('aws', "#{asdf_package_path}/pip") do
+#   it { should be_installed }
+# end
 
 # check to exit command
 commands = ["travis", "aws"]
