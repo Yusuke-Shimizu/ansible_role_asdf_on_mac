@@ -19,14 +19,14 @@
 - name: Install language
   shell: /bin/bash -lc "asdf install {{ item.name }} {{ item.version }}"
   with_items:
-    - { name: python, version: 3.7.1 }
+    - { name: python, version: 3.6.8 }
     - { name: ruby, version: 2.5.3 }
     - { name: golang, version: 1.11 }
 
 - name: set global
   shell: /bin/bash -lc "asdf global {{ item.name }} {{ item.version }}"
   with_items:
-    - { name: python, version: 3.7.1 }
+    - { name: python, version: 3.6.8 }
     - { name: ruby, version: 2.5.3 }
     - { name: golang, version: 1.11 }
 
