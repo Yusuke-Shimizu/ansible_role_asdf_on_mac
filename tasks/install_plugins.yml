@@ -1,34 +1,56 @@
 ---
-- name: Install plugins
-  shell: /bin/bash -lc "asdf plugin-add {{ item }}"
+- name: Get installed plugin list
+  shell: /bin/bash -lc "asdf plugin-list | grep {{ item.name }}"
+  register: plugin_list_result
   with_items:
-    - python
-    - ruby
-    - golang
+    # - { name: python, version: 3.6.8 }
+    - { name: python, version: 3.7.2 }
+    - { name: ruby, version: 2.5.3 }
+    - { name: golang, version: 1.11 }
+    # - { name: java, version: 1.11 }
+  ignore_errors: yes
+  changed_when: no
 
-# - name: List plugins
-#   shell: /bin/bash -lc "asdf list-all {{ item }}"
-#   register: result
-#   with_items:
-#     - python
-#     - ruby
-#     - golang
-# - debug: var=item.stdout_lines
-#   with_items: '{{ result.results }}'
+- name: Install plugins
+  shell: /bin/bash -lc "asdf plugin-add {{ item.item.name }}"
+  with_items: '{{ plugin_list_result.results }}'
+  when: item.failed
+
+- name: Get installed versions of a package
+  shell: /bin/bash -lc "asdf list {{ item.name }} | grep {{ item.version }}"
+  register: installed_package_result
+  with_items:
+    # - { name: python, version: 3.6.8 }
+    - { name: python, version: 3.6.6 }
+    - { name: ruby, version: 2.5.3 }
+    - { name: golang, version: 1.11 }
+  ignore_errors: yes
+  changed_when: no
+
+- debug:
+    var: installed_package_result
 
 - name: Install language
-  shell: /bin/bash -lc "asdf install {{ item.name }} {{ item.version }}"
+  shell: /bin/bash -lc "asdf install {{ item.item.name }} {{ item.item.version }}"
+  with_items: '{{ installed_package_result.results }}'
+  when: item.failed
+
+
+- name: Get current versions of a package
+  shell: /bin/bash -lc "asdf list {{ item.name }} | grep {{ item.version }}"
+  register: current_package_result
   with_items:
-    - { name: python, version: 3.6.8 }
+    # - { name: python, version: 3.6.8 }
+    - { name: python, version: 3.6.6 }
     - { name: ruby, version: 2.5.3 }
     - { name: golang, version: 1.11 }
+  ignore_errors: yes
+  changed_when: no
 
-- name: set global
-  shell: /bin/bash -lc "asdf global {{ item.name }} {{ item.version }}"
-  with_items:
-    - { name: python, version: 3.6.8 }
-    - { name: ruby, version: 2.5.3 }
-    - { name: golang, version: 1.11 }
+# - name: set global
+#   shell: /bin/bash -lc "asdf global {{ item.item.name }} {{ item.item.version }}"
+#   with_items: '{{ current_package_result.results }}'
+#   when: item.failed
 
-- name: Recreate shims
-  shell: /bin/bash -lc "asdf reshim python"
+# - name: Recreate shims
+#   shell: /bin/bash -lc "asdf reshim python"

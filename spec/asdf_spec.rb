@@ -27,12 +27,37 @@ end
 describe command("bash -lc 'asdf --version'") do
 	include_context 'check_command'
 end
-describe command("bash -lc 'asdf plugin-list'") do
-	include_context 'check_command'
-	its('stdout') { should match /ruby/ }
-	its('stdout') { should match /python/ }
-	its('stdout') { should match /golang/ }
-end
+languages = [{name:"ruby", version:"2.4.1"}, {name:"python", version:"3.7.2"}, {name:"golang", version:"1.11"}]
+# languages = [{name:"ruby", version:"2.4.1"}]
+# languages = [{name:"ruby", version:"2.4.1"}, {name:"python", version:"3.7.2"}]
+languages.each{|language|
+	describe command("bash -lc 'asdf plugin-list'") do
+		include_context 'check_command'
+		its('stdout') { should match "#{language[:name]}" }
+	end
+	describe command("bash -lc 'asdf where #{language[:name]}'") do
+		include_context 'check_command'
+		its('stdout') { should include "#{language[:name]}" }
+	end
+	describe command("bash -lc 'asdf list #{language[:name]}'") do
+		include_context 'check_command'
+		its('stdout') { should include "#{language[:version]}" }
+	end
+	describe command("bash -lc 'asdf which #{language[:name]}'") do
+		include_context 'check_command'
+		its('stdout') { should include "#{language[:version]}" }
+	end
+	describe command("bash -lc 'asdf current #{language[:name]}'") do
+		include_context 'check_command'
+		its('stdout') { should include "#{language[:version]}" }
+	end
+}
+# describe command("bash -lc 'asdf plugin-list'") do
+# 	include_context 'check_command'
+# 	its('stdout') { should match /ruby/ }
+# 	its('stdout') { should match /python/ }
+# 	its('stdout') { should match /golang/ }
+# end
 
 # check listed of package
 # asdf_package_path = "#{asdf_root}/shims"
@@ -44,15 +69,15 @@ end
 # end
 
 # check to exit command
-commands = ["travis", "aws"]
-commands.each{|command|
-	describe command("bash -lc '#{command} --version'") do
-		include_context 'check_command'
-	end
-}
+# commands = ["travis", "aws"]
+# commands.each{|command|
+# 	describe command("bash -lc '#{command} --version'") do
+# 		include_context 'check_command'
+# 	end
+# }
 
-describe command("which curl") do
-	include_context 'check_command'
+# describe command("which curl") do
+# 	include_context 'check_command'
 
-	its('stdout') { should match /\/usr\/bin\/curl/ }
-end
+# 	its('stdout') { should match /\/usr\/bin\/curl/ }
+# end

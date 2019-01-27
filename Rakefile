@@ -28,3 +28,11 @@ namespace :ansible do
     sh 'ansible-galaxy install -r requirements.yml'
   end
 end
+
+namespace :ci do
+  desc "Run Inspec tests"
+  task :default do
+    Rake::Task["ansible:build"].invoke()
+    Rake::Task["inspec:default"].invoke()
+  end
+end

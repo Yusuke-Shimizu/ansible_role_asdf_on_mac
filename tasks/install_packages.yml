@@ -15,3 +15,5 @@
   shell: /bin/bash -lc "pip install awscli --upgrade --user"
 - name: Install molecule
   shell: /bin/bash -lc "pip install molecule --upgrade --user"
+- name: Install docker-py
+  shell: /bin/bash -lc "pip install docker-py --upgrade --user"
