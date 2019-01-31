@@ -1,19 +1,28 @@
 ---
-- name: Upgrade gem
-  shell: /bin/bash -lc "gem update --system"
-- name: Recreate
-  shell: /bin/bash -lc "gem pristine --all"
-- name: Upgrade bundler
-  shell: /bin/bash -lc "gem update bundler"
-- name: Upgrade pip
-  shell: /bin/bash -lc "pip install --upgrade pip"
+# - name: Upgrade gem
+#   shell: /bin/bash -lc "gem update --system"
+# - name: Recreate
+#   shell: /bin/bash -lc "gem pristine --all"
+# - name: Upgrade bundler
+#   shell: /bin/bash -lc "gem update bundler"
 
-- name: Install travic client
-  shell: /bin/bash -lc "gem install travis"
+- name: Install gem packages
+  gem:
+    name: "{{ item }}"
+    executable: "{{ ansible_env.HOME }}/.asdf/shims/gem"
+    user_install: False
+  with_items:
+    - travis
+    - rake
+    - bundler
 
-- name: Install aws cli
-  shell: /bin/bash -lc "pip install awscli --upgrade --user"
-- name: Install molecule
-  shell: /bin/bash -lc "pip install molecule --upgrade --user"
-- name: Install docker-py
-  shell: /bin/bash -lc "pip install docker-py --upgrade --user"
+- name: install pip packages
+  pip:
+    name: "{{ item }}"
+    executable: "{{ ansible_env.HOME }}/.asdf/shims/pip"
+    state: latest
+  with_items:
+    - pip
+    - awscli
+    - molecule
+    - docker-py

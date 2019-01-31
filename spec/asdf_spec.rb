@@ -27,9 +27,9 @@ end
 describe command("bash -lc 'asdf --version'") do
 	include_context 'check_command'
 end
-languages = [{name:"ruby", version:"2.4.1"}, {name:"python", version:"3.7.2"}, {name:"golang", version:"1.11"}]
-# languages = [{name:"ruby", version:"2.4.1"}]
-# languages = [{name:"ruby", version:"2.4.1"}, {name:"python", version:"3.7.2"}]
+# languages = [{name:"ruby", version:"2.5.3"}, {name:"python", version:"3.6.8"}, {name:"golang", version:"1.11"}]
+# languages = [{name:"ruby", version:"2.5.3"}]
+languages = [{name:"ruby", version:"2.5.3"}, {name:"python", version:"3.6.8"}]
 languages.each{|language|
 	describe command("bash -lc 'asdf plugin-list'") do
 		include_context 'check_command'
@@ -52,32 +52,39 @@ languages.each{|language|
 		its('stdout') { should include "#{language[:version]}" }
 	end
 }
-# describe command("bash -lc 'asdf plugin-list'") do
-# 	include_context 'check_command'
-# 	its('stdout') { should match /ruby/ }
-# 	its('stdout') { should match /python/ }
-# 	its('stdout') { should match /golang/ }
-# end
 
 # check listed of package
-# asdf_package_path = "#{asdf_root}/shims"
-# describe gem('travis', "#{asdf_package_path}/gem") do
-#   it { should be_installed }
-# end
-# describe pip('aws', "#{asdf_package_path}/pip") do
-#   it { should be_installed }
-# end
+asdf_package_path = "#{asdf_root}/shims"
+gem_packages = ["travis", "rake", "bundler"]
+gem_packages.each{|gem_package|
+	describe gem("#{gem_package}", "#{asdf_package_path}/gem") do
+		it { should be_installed }
+	end
+}
+
+pip_packages = ["awscli", "molecule", "docker-py"]
+pip_packages.each{|pip_package|
+	describe pip("#{pip_package}", "#{asdf_package_path}/pip") do
+		it { should be_installed }
+	end
+}
+# check below
+# You are using pip version 18.1, however version 19.0.1 is available.
+# You should consider upgrading via the 'pip install --upgrade pip' command.
+describe command("bash -lc 'pip list'") do
+	include_context 'check_command'
+end
 
 # check to exit command
-# commands = ["travis", "aws"]
-# commands.each{|command|
-# 	describe command("bash -lc '#{command} --version'") do
-# 		include_context 'check_command'
-# 	end
-# }
+commands = ["travis", "aws"]
+commands.each{|command|
+	describe command("bash -lc '#{command} --version'") do
+		include_context 'check_command'
+	end
+}
 
-# describe command("which curl") do
-# 	include_context 'check_command'
+describe command("which curl") do
+	include_context 'check_command'
 
-# 	its('stdout') { should match /\/usr\/bin\/curl/ }
-# end
+	its('stdout') { should match /\/usr\/bin\/curl/ }
+end
